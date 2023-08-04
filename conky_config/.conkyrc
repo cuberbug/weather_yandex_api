@@ -1,0 +1,64 @@
+conky.config = {
+	use_xft = true,
+	xftalpha = 0.1,
+    	update_interval = 1.0,
+    	total_run_times = 0,
+    	own_window = true,
+    	own_window_class = 'Conky',
+    	own_window_type = 'desktop',
+	own_window_argb_visual = true,
+	own_window_argb_value = 0,
+	own_window_transparent = true,
+	own_window_hints = undecorated,below,sticky,skip_taskbar,skip_pager,
+	double_buffer = true,
+	minimum_height = 227,
+	minimum_width = 666,
+	draw_shades = no,
+	draw_outline = no,
+	draw_borders = no,
+	draw_graph_borders = no,
+	default_color = white,
+	default_shade_color = red,
+	default_outline_color = green,
+	alignment = 'top_right',
+	gap_y = 175,
+	no_buffers = true,
+ 	uppercase = false,
+	cpu_avg_samples = 2,
+	net_avg_samples = 1,
+	override_utf8_locale = true,
+	use_spacer = 'none'
+}
+
+conky.text = [[
+${voffset 10}${color EAEAEA}${font GE Inspira:pixelsize=120}${time %H:%M}${font} \
+${voffset -82}${offset 10}${color FFA300}${font GE Inspira:pixelsize=42}${time %d} \
+${voffset -15}${color EAEAEA}${font GE Inspira:pixelsize=22}${time  %B} \
+${time %Y}${font}${voffset 24}${font GE Inspira:pixelsize=58}${offset -130}${time %A}${font}
+${voffset 15}${offset 10} \
+${font Ubuntu:pixelsize=10}${color FFA300}CPU Temp${offset 5}$color${hwmon 2 temp 1}°C \
+${offset 20}${color FFA300}RAM${offset 5}$color$mem / $memmax${offset 20}${color FFA300}\
+CPU${offset 5}$color${cpu cpu0}%  ${offset 20}${color FFA300}INET${offset 5}  $color${totaldown wlo1} \
+${font Wingdings 3,:pixelsize=10}${color 005CFF} h${font Ubuntu:pixelsize=10}$color${upspeed wlo1} \
+${font Wingdings 3,:pixelsize=10}${color FF0000} i${font Ubuntu:pixelsize=10}$color${downspeed wlo1}
+${image ~/weather/icon/wicon.png -p 50, 155 -s 75x75, -f  900} \
+${voffset 9}${offset 140}${font GE Inspira:pixelsize=50}$color${execi 900 cat ~/weather/fact.txt | grep -Pom1 '(?s)((?<="temp":)(.*?)(?=(,"feels_like")))'}°${font} \
+${image ~/weather/icon/line.png -p 222, 169 -s 1x45} 
+${image ~/weather/icon/wind.png -p 240, 168 -s 24x24} \
+${voffset -43}${offset 269}${font GE Inspira:pixelsize=16}${execi 900 cat ~/weather/fact.txt | grep -Pom1 '(?s)((?<="wind_speed":)(.*?)(?=(,"wind_dir")))'} м/с, \
+${if_match "${execi 900 cat ~/weather/fact.txt | grep -Pom1 '(?s)((?<="wind_dir":")(.*?)(?=(","pressure_mm")))'}" == "nw"}СЗ${endif}\
+${if_match "${execi 900 cat ~/weather/fact.txt | grep -Pom1 '(?s)((?<="wind_dir":")(.*?)(?=(","pressure_mm")))'}" == "n"}С${endif}\
+${if_match "${execi 900 cat ~/weather/fact.txt | grep -Pom1 '(?s)((?<="wind_dir":")(.*?)(?=(","pressure_mm")))'}" == "ne"}СВ${endif}\
+${if_match "${execi 900 cat ~/weather/fact.txt | grep -Pom1 '(?s)((?<="wind_dir":")(.*?)(?=(","pressure_mm")))'}" == "e"}В${endif}\
+${if_match "${execi 900 cat ~/weather/fact.txt | grep -Pom1 '(?s)((?<="wind_dir":")(.*?)(?=(","pressure_mm")))'}" == "se"}ЮВ${endif}\
+${if_match "${execi 900 cat ~/weather/fact.txt | grep -Pom1 '(?s)((?<="wind_dir":")(.*?)(?=(","pressure_mm")))'}" == "s"}Ю${endif}\
+${if_match "${execi 900 cat ~/weather/fact.txt | grep -Pom1 '(?s)((?<="wind_dir":")(.*?)(?=(","pressure_mm")))'}" == "sw"}ЮЗ${endif}\
+${if_match "${execi 900 cat ~/weather/fact.txt | grep -Pom1 '(?s)((?<="wind_dir":")(.*?)(?=(","pressure_mm")))'}" == "w"}З${endif}\
+${if_match "${execi 900 cat ~/weather/fact.txt | grep -Pom1 '(?s)((?<="wind_dir":")(.*?)(?=(","pressure_mm")))'}" == "c"}штиль${endif}\
+${image ~/weather/icon/water.png -p 240, 191 -s 24x24} 
+${voffset 7}${offset 274}${execi 900 cat ~/weather/fact.txt | grep -Pom1 '(?s)((?<="temp_water":)(.*?)(?=(,"icon")))'}° ${color FFA300}${offset 65}Москва
+]]
+
+
+
+
