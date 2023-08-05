@@ -4,7 +4,7 @@ sleep 5;
 
 API='X-Yandex-API-Key: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx';
 
-URL='https://api.weather.yandex.ru/v2/informers?lat=55.765426&lon=37.605703';
+URL='https://api.weather.yandex.ru/v2/xxxxxxxxx?lat=55.765426&lon=37.605703';
 
 curl -H "$API"  "$URL"  > ~/weather/full.txt;
 
